@@ -1,0 +1,10 @@
+create database ci_teste;
+
+use ci_teste;
+
+create table pessoas (
+   cd_pessoa int not null auto_increment PRIMARY key,
+   nm_pessoa varchar(255),
+   fone VARCHAR(20),
+   email varchar(150)
+) ENGINE = INNODB;
