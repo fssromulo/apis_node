@@ -17,6 +17,7 @@ objConexao.connect(function (err) {
 
 const express = require('express');
 const app = express();
+app.use(express.json());
 
 app.get('/',(req, res) => {
    objConexao.query('SELECT * FROM pessoas', function (error, results, fields) {
@@ -34,17 +35,19 @@ app.post('/inserir',(req, res) => {
    //    email: 'emailVindoDaApi@gmail.com',
    // };
 
-   console.log(req);
+   var objPessoaInserir = req.body;
 
-   // var query = objConexao.query(
-   //    'INSERT INTO pessoas SET ?',
-   //    objPessoaInserir,
-   //    function (error, results, fields) {
-   //       if (error) throw error;
-   //       res.send(results);
-   //       console.log(query.sql);
-   //    }
-   // );
+   console.log(objPessoaInserir);
+
+   var query = objConexao.query(
+      'INSERT INTO pessoas SET ?',
+      objPessoaInserir,
+      function (error, results, fields) {
+         if (error) throw error;
+         res.send(results);
+         console.log(query.sql);
+      }
+   );
 
 
 });

@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "my-sql": "^1.2.15"
+    "my-sql": "^1.2.15",
+    "npm": "^6.4.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
