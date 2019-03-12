@@ -2,15 +2,16 @@ Curso de Node.Js -- Cria��o de Api's
 ========================================
 
 == Chamar API ==
-[GET][POST]http://localhost:3001/api//pessoa
+// Link do mysql(NPM): https://www.npmjs.com/package/mysql
+[GET][POST][PUT]http://localhost:3001/api//pessoa
 
 Dados POST:
 {
-   "nm_pessoa" :  "teste 123",
-   "fone": "(47) 991725457",
-   "email": "romulo@unimestre.com"
+   "nm_pessoa": "Romulo api update",
+   "email": "email@lista_email.com",
+   "fone": 47991725457,
+   "cd_pessoa": 22
 }
-
 
 == Express oque �? ==
 

@@ -11,12 +11,41 @@ module.exports = {
 		});
 	},
 	cadastrar (req, res)  {
-		var objPessoaInserir = req.body;
-		console.log(objPessoaInserir);
+		let objPessoa = req.body;
+		// console.log(objPessoa);
 
-		var query = objConexao.query(
+		let query = objConexao.query(
 			'INSERT INTO pessoas SET ?',
-			objPessoaInserir,
+			objPessoa,
+			function (error, results, fields) {
+				if (error) throw error;
+				res.send(results);
+				console.log(query.sql);
+			}
+		);
+	},
+	atualizar(req, res) {
+		let objPessoa = req.body;
+		let query = objConexao.query(
+			'UPDATE pessoas SET nm_pessoa = ?, email = ?, fone = ? WHERE cd_pessoa = ?',
+			[
+				objPessoa.nm_pessoa,
+				objPessoa.email,
+				objPessoa.fone,
+				req.params.cd_pessoa
+			],
+			function (error, results, fields) {
+				if (error) throw error;
+				res.send(results);
+				console.log(query.sql);
+			}
+		);
+	},
+	apagar(req,res) {
+		// let objPessoa = req.body;
+		let query = objConexao.query(
+			'DELETE FROM pessoas WHERE cd_pessoa = ?',
+			[req.params.cd_pessoa],
 			function (error, results, fields) {
 				if (error) throw error;
 				res.send(results);
