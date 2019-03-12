@@ -1,19 +1,29 @@
-Curso de Node.Js -- Criação de Api's
+Curso de Node.Js -- Criaï¿½ï¿½o de Api's
 ========================================
 
+== Chamar API ==
+[GET][POST]http://localhost:3001/api//pessoa
 
-== Express oque é? == 
+Dados POST:
+{
+   "nm_pessoa" :  "teste 123",
+   "fone": "(47) 991725457",
+   "email": "romulo@unimestre.com"
+}
 
-É um microframework, que vai auxiliar a trabalhar com rotas e views. Rotas são os endereços que o usuário poderá acessar através das api's. E views: São as formas de visuazilação.
 
-// Primeiro parametro do método GET é a rota que será usada
-// Segundo é uma função que receberá dois parametros "req" e "res"
-// - REQ: Simboliza a requisicao que estavamos fazendo ao servidor, o req vai conter todos os detalhes dessa requisição, como por exemplo: Parâmetros, corpo da requisição, cabeçalho da requisição, usuário da requisição, autenticação se esta autenticado ou não, ip.
-// - RES: Estarão todos os dados de respostas da requisição para o usuário.
+== Express oque ï¿½? ==
+
+ï¿½ um microframework, que vai auxiliar a trabalhar com rotas e views. Rotas sï¿½o os endereï¿½os que o usuï¿½rio poderï¿½ acessar atravï¿½s das api's. E views: Sï¿½o as formas de visuazilaï¿½ï¿½o.
+
+// Primeiro parametro do mï¿½todo GET ï¿½ a rota que serï¿½ usada
+// Segundo ï¿½ uma funï¿½ï¿½o que receberï¿½ dois parametros "req" e "res"
+// - REQ: Simboliza a requisicao que estavamos fazendo ao servidor, o req vai conter todos os detalhes dessa requisiï¿½ï¿½o, como por exemplo: Parï¿½metros, corpo da requisiï¿½ï¿½o, cabeï¿½alho da requisiï¿½ï¿½o, usuï¿½rio da requisiï¿½ï¿½o, autenticaï¿½ï¿½o se esta autenticado ou nï¿½o, ip.
+// - RES: Estarï¿½o todos os dados de respostas da requisiï¿½ï¿½o para o usuï¿½rio.
 
 app.get('/', (req, res) => {});
 
 
 // Nodemon - "npm -D nodemon"
-É Usada para não precisar ficar rodando "node server.js"
-para ele funcionar devemos criar dentro do package.json um script como exemplo: "dev" e adicionar o comando 'nodemon server.js' que chamará nosso arquivo JS da api. Após isso basta rodar no cmd 'npm run -dev'; 
+ï¿½ Usada para nï¿½o precisar ficar rodando "node server.js"
+para ele funcionar devemos criar dentro do package.json um script como exemplo: "dev" e adicionar o comando 'nodemon server.js' que chamarï¿½ nosso arquivo JS da api. Apï¿½s isso basta rodar no cmd 'npm run -dev';
