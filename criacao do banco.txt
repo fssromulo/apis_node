@@ -1,10 +1,13 @@
-create database ci_teste;
+drop database ci_teste;
+create database api_node_vue;
 
-use ci_teste;
+use api_node_vue;
 
-create table pessoas (
-   cd_pessoa int not null auto_increment PRIMARY key,
-   nm_pessoa varchar(255),
+create table if not exists pessoas (
+   cd_pessoa INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   nm_pessoa VARCHAR(255),
    fone VARCHAR(20),
-   email varchar(150)
+   email VARCHAR(150),
+   login varchar(100),
+   senha varchar(50)
 ) ENGINE = INNODB;

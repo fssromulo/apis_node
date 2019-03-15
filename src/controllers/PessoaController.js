@@ -1,7 +1,7 @@
 const objConexao = require('../models/Conexao.js');
 
-module.exports = {
-	getPessoas (req, res) {
+let objPessoaController = {
+	getPessoas(req, res) {
 		objConexao.query(
 			'SELECT * FROM pessoas',
 			function (error, results, fields) {
@@ -10,24 +10,51 @@ module.exports = {
 				// console.log('The solution is: ', results[0].solution);
 		});
 	},
-	getPessoa (req, res) {
-		
+	getPessoa(req, res) {
 		objConexao.query(
 			'SELECT * FROM pessoas WHERE cd_pessoa = ?',
 			[req.params.cd_pessoa],
 			function (error, results, fields) {
 				if (error) throw error;
 				res.send(results);
-				// console.log('The solution is: ', results[0].solution);
 		});
 	},
-	cadastrar (req, res)  {
+	getLogin() {
 		let objPessoa = req.body;
-		// console.log(objPessoa);
+		objConexao.query(
+			'SELECT * FROM pessoas WHERE login = ? AND senha = md5(?)',
+			[
+				objPessoa.login,
+				objPessoa.senha
+			],
+			function (error, results, fields) {
+				if (error) throw error;
+				res.send(results);
+				// console.log('The solution is: ', results[0].solution);
+			});
+	},
+	converteParaSQL(ds_sql_converter) {
+		// Necessário para que não coloque entre ASPAS e execute como string ao invés de função
+		return {
+			toSqlString: () => { return ds_sql_converter; }
+		};
+	},
+	cadastrar(req, res)  {
+		let objPessoa = req.body;
+
+		// Necessário para que não coloque entre ASPAS e execute como string ao invés de função
+		let ds_senha = objPessoaController.converteParaSQL(objPessoa.senha);
+		let objPessoaSalvar = {
+			"nm_pessoa": objPessoa.nm_pessoa,
+			"email": objPessoa.email,
+			"fone": 47991725457,
+			"login": objPessoa.login,
+			"senha": ds_senha
+		}
 
 		let query = objConexao.query(
 			'INSERT INTO pessoas SET ?',
-			objPessoa,
+			objPessoaSalvar,
 			function (error, results, fields) {
 				if (error) throw error;
 				res.send(results);
@@ -38,11 +65,13 @@ module.exports = {
 	atualizar(req, res) {
 		let objPessoa = req.body;
 		let query = objConexao.query(
-			'UPDATE pessoas SET nm_pessoa = ?, email = ?, fone = ? WHERE cd_pessoa = ?',
+			'UPDATE pessoas SET nm_pessoa = ?, email = ?, fone = ?, senha = ?, login = ? WHERE cd_pessoa = ?',
 			[
 				objPessoa.nm_pessoa,
 				objPessoa.email,
 				objPessoa.fone,
+				objPessoaController.converteParaSQL(objPessoa.senha),
+				objPessoa.login,
 				req.params.cd_pessoa
 			],
 			function (error, results, fields) {
@@ -65,3 +94,5 @@ module.exports = {
 		);
 	}
 };
+
+module.exports = objPessoaController;

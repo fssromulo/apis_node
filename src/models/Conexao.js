@@ -4,7 +4,7 @@ const objConexao = mysql.createConnection({
    host: 'localhost',
    user: 'root',
    password: '',
-   database: 'ci_teste'
+   database: 'api_node_vue'
 });
 
 objConexao.connect(function (err) {
