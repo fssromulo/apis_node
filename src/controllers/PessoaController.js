@@ -1,9 +1,20 @@
 const objConexao = require('../models/Conexao.js');
 
 module.exports = {
-	index (req, res) {
+	getPessoas (req, res) {
 		objConexao.query(
 			'SELECT * FROM pessoas',
+			function (error, results, fields) {
+				if (error) throw error;
+				res.send(results);
+				// console.log('The solution is: ', results[0].solution);
+		});
+	},
+	getPessoa (req, res) {
+		
+		objConexao.query(
+			'SELECT * FROM pessoas WHERE cd_pessoa = ?',
+			[req.params.cd_pessoa],
 			function (error, results, fields) {
 				if (error) throw error;
 				res.send(results);
