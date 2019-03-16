@@ -19,13 +19,13 @@ let objPessoaController = {
 				res.send(results);
 		});
 	},
-	getLogin() {
+	getLogin(req, res) {
 		let objPessoa = req.body;
 		objConexao.query(
-			'SELECT * FROM pessoas WHERE login = ? AND senha = md5(?)',
+			'SELECT * FROM pessoas WHERE login = ? AND senha = ?',
 			[
-				objPessoa.login,
-				objPessoa.senha
+				req.params.login,
+				req.params.senha
 			],
 			function (error, results, fields) {
 				if (error) throw error;
@@ -43,13 +43,13 @@ let objPessoaController = {
 		let objPessoa = req.body;
 
 		// Necessário para que não coloque entre ASPAS e execute como string ao invés de função
-		let ds_senha = objPessoaController.converteParaSQL(objPessoa.senha);
+		// let ds_senha = objPessoaController.converteParaSQL(objPessoa.senha);
 		let objPessoaSalvar = {
 			"nm_pessoa": objPessoa.nm_pessoa,
 			"email": objPessoa.email,
-			"fone": 47991725457,
+			"fone": objPessoa.fone,
 			"login": objPessoa.login,
-			"senha": ds_senha
+			"senha": objPessoa.senha
 		}
 
 		let query = objConexao.query(
@@ -70,7 +70,7 @@ let objPessoaController = {
 				objPessoa.nm_pessoa,
 				objPessoa.email,
 				objPessoa.fone,
-				objPessoaController.converteParaSQL(objPessoa.senha),
+				objPessoa.senha,
 				objPessoa.login,
 				req.params.cd_pessoa
 			],
