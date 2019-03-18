@@ -22,9 +22,9 @@ let objPessoaController = {
 	getLogin(req, res) {
 		let objPessoa = req.body;
 		objConexao.query(
-			'SELECT * FROM pessoas WHERE login = ? AND senha = ?',
+			'SELECT * FROM pessoas WHERE email = ? AND senha = ?',
 			[
-				req.params.login,
+				req.params.email,
 				req.params.senha
 			],
 			function (error, results, fields) {
